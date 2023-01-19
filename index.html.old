@@ -1,0 +1,462 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODO LIST</title>
+  </head>
+  <body onload="GetResult()">
+    <!-- <a href="morpion.html">Go to the Tick Tack Toe</a> -->
+    <input id="loginButtonInput" type="checkbox">
+    <label for="loginButtonInput" id ="loginButton"></label>
+      
+    </button>
+    
+    <form id="loginOptionsContainer" method="post" action="script.php">
+      <input class="loginField" type="text" name="identifiant" id="loginId" placeholder="login ID">
+      <input class="loginField" type="text" name="mdp" id="loginPass" placeholder="password">
+      <button class="loginOptions" id="login" type="submit" >Login</button>
+      <button class="loginOptions" id="signUp" type="submit">Sign Up</button>
+      <pre id="result"></pre>
+
+    </form>
+    
+    <h1>TODO.list</h1>
+    <div id="main">
+      <div id="gridMain">
+        <input type="text" id="valInput" placeholder="type something" />
+        <button class="submit" id="ajouter" onclick="entrerVal()">ADD</button>
+        <button onclick="suppr()" class="submit" id="tSuppr">CLEAR</button>
+        <h3>click on items to delete them</h3>
+      </div>
+      
+      <div id="listes">
+        
+      </div>
+    </div>
+    <h4 onclick="window.open('https://dcjetc.com/meriadec-legal/portfolio', '_blank')">© 2022 - 2023 Meriadec Legal </h4>
+  </body>
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script>
+    document.getElementById("valInput").addEventListener("keypress", function (event) {
+        if (event.keyCode == 13) {
+          entrerVal();
+        }
+      });
+
+    function getCookie() {
+        var cookie = document.cookie
+        var themeStatus = cookie.split('; ')
+        for (let elem of themeStatus) {
+
+            if (elem.split('=')[0] === 'result') {
+                
+                return elem.split('=')[1]
+            }
+        }
+    }
+
+
+    function GetResult(){
+      if(getCookie()==="invalid"){
+        document.getElementById('result').textContent = "Username taken, please enter a new one"
+      } else{
+        document.getElementById('result').textContent = "Welcome back !"
+      }
+      
+    }
+
+    
+    
+    function entrerVal() {
+      var content = document.getElementById("valInput").value;
+      if(content != ""){
+        var p = document.createElement("p");
+      p.textContent = content;
+      p.setAttribute("onclick", "deleteMoi(this)");
+      p.setAttribute("class", "aSuppr");
+      document.getElementById("listes").append(p);
+
+      document.getElementById("valInput").value = "";
+      }
+      
+    }
+
+    function suppr() {
+      var listeASuppr = document.getElementsByClassName("aSuppr");
+      Array.from(listeASuppr).forEach((elem, index) => {
+        setTimeout(function(){
+          elem.animate([
+          {transform:"translateX(0)"},
+          {transform:"translateX(-150vw)"}
+          ],{
+            duration: 500,
+            fill : "forwards",
+            timing : "ease-in"
+          
+          });
+        
+          setTimeout(function(){
+            elem.remove()
+          },400);
+
+        }, index * 150)
+        
+        
+      });
+      
+    }
+
+    function deleteMoi(elem) {
+      elem.animate([
+          {transform:"translateX(0)"},
+          {transform:"translateX(-150vw)"}
+          ],{
+            duration: 500,
+            fill : "forwards",
+            timing : "ease-in"
+          
+          });
+        
+          setTimeout(function(){
+            elem.remove()
+          },400);
+      }
+
+    
+  </script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Nabla&family=Raleway&display=swap");
+
+    :root{
+      --buttonColor : #f5b744;
+    }
+
+    body {
+      font-family: "Raleway", sans-serif;
+      font-weight: 400;
+      background-color: #e3b276;
+      
+      background-image: radial-gradient(#ffda94 0.9px, #fdb153 0.9px);
+      background-size: 40px 40px;
+    }
+
+    p {
+      padding: 8px 20px;
+      display: block;
+      border: 5px solid #fed17d;
+      background-color: var(--buttonColor);
+      border-radius: 50px;
+      margin: 8px;
+      color: #efefef;
+      font-size: 18px;
+      font-weight: 600;
+      width: fit-content;
+      user-select: none;
+      cursor: pointer;
+      position: relative;
+
+      animation: appear 350ms ease-out forwards;
+    }
+
+    
+
+    #gridMain{
+      display: grid;
+      grid-template-columns: fit-content(50px) 1fr;
+      grid-template-rows: repeat(2, 1fr);
+      grid-column-gap: 7px;
+      grid-row-gap: 7px;
+      position: relative;
+    }
+
+    p:hover::after {
+      content: "x";
+      display: block;
+      position: absolute;
+      left: -35px;
+      top: 4px;
+      border: 2px solid #efefef;
+      padding: 0 7px 2px;
+      border-radius: 50px;
+
+    }
+
+    @keyframes appear {
+      from {
+        transform: translateX(-100vw);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    #ajouter {
+      top: -6px;
+      right: 0;
+      grid-area: 1 / 5 / 2 / 6
+    }
+
+    #tSuppr{
+      grid-area: 1 / 6 / 2 / 7;
+      top: -6px;
+      
+    }
+
+    h1 {
+      padding-top: 65px;
+      text-align: center;
+      color: #efefef;
+      font-weight: 800;
+      font-family: "Nabla", cursive;
+      font-size: 80px;
+    }
+
+    h3 {
+      color: #e4e4e4;
+      font-style: italic;
+      font-size: 20px;
+      margin-top: 8px;
+      width: 100%;
+      grid-area: 2 / 1 / 3 / 7; 
+      justify-self: right;
+    }
+
+    h4{
+      position: fixed;
+      display: block;
+      bottom: -10px;
+      right: 10px;
+      color: #494949;
+      cursor: pointer;
+    }
+
+    a {
+      top: 5px;
+      left: 5px;
+      border: 2px solid #fed17d;
+      background-color: var(--buttonColor);
+      border-radius: 15px;
+      padding: 6px 15px;
+      font-weight: 600;
+      margin: 2px;
+      text-decoration: none;
+      color: #f3f3f3;
+      position: fixed;
+    }
+
+    
+
+    button {
+      border: 5px solid #fed17d;
+      background-color: var(--buttonColor);
+      border-radius: 50px;
+      text-align: center;
+      padding: 7px 15px;
+      font-size: 20px;
+
+      font-size: 20px;
+      color: #efefef;
+      font-weight: 800;
+      height: fit-content;
+      justify-self: right;
+      
+      width: fit-content;
+      
+      display: block;
+      position: relative;
+      margin: 5px;
+      user-select: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ffc862;
+      transition: background-color 150ms linear;
+    }
+
+    #valInput {
+      grid-area: 1 / 1 / 2 / 5;
+      width: 100%;
+      background-color: #fed17d;
+      border: 5px solid #ffc353;
+      border-radius: 50px;
+      color: #574734;
+      height: 52px;
+      outline: none;
+      font-weight: 600;
+      font-size: 20px;
+      padding: 0px 15px;
+      font-family: "Raleway", sans-serif ;
+    }
+
+    #main {
+      width: 50%;
+      margin: 5% auto;
+    }
+
+    ::-webkit-scrollbar {
+    width: 20px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: inherit;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #fed17d;
+      border-radius: 20px;
+      border: 6px solid transparent;
+      background-clip: content-box;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #b89759;
+    }
+
+    #loginButtonInput{
+      display: none;
+    }
+
+    #loginButton{
+      border: none;
+      user-select: none;
+      cursor: pointer;
+      
+      background: url(media/img_569204.svg);
+      
+      background-size: cover;
+      aspect-ratio: 1;
+      width: 50px;
+      
+      position: absolute;
+      top: 10px;
+      right: 15px;
+
+      z-index: 15;
+    }
+
+    #loginButtonInput:not(:checked) ~ #loginOptionsContainer{
+      
+      animation: arriver 250ms forwards ease-out;
+    }
+    
+    #loginButtonInput:checked ~ #loginOptionsContainer{
+      animation: partir 250ms forwards ease-in;
+      
+    }
+
+    @keyframes arriver{
+      from{
+        transform: translateX(100%);
+      }
+      to{
+        transform : translateX(0%);
+      }
+    }
+
+    @keyframes partir{
+      from{
+        transform: translateX(0%);
+      }
+      to{
+        transform : translateX(100%);
+      }
+    }
+
+    #loginId{
+      grid-area: 1 / 1 / 2 / 3;
+    }
+
+    #loginPass{
+      grid-area: 2 / 1 / 3 / 3; 
+    }
+
+    .loginField{
+      max-width: 80%;
+      margin-left: 10px;
+      height: 2rem;
+      background-color: #fff;
+      border: #f1f1f1;
+      border-radius: 50px;
+      padding: 0 13px;
+      font-size: 16px;
+    }
+
+    #loginOptionsContainer{
+      opacity: 1;
+      padding-top: 2rem;
+      background-color: #f1f1f1;
+      border-radius: 8px 0 0 8px;
+      width: 450px;
+      height: 250px;
+      position: fixed;
+      right: -3px;
+      top: 0;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      grid-column-gap: 3px;
+      grid-row-gap: 3px;
+    }
+    
+
+    .loginOptions{
+      
+      position: relative;
+      margin: 0 auto;
+      
+    }
+
+    .loginOptions:nth-child(1){
+      grid-area: 3 / 1 / 4 / 2; 
+    }
+
+    #result{
+      bottom: 0; 
+      padding-left: 10px;
+      font-family: "Raleway", sans-serif;
+      font-size: 16px;
+    }
+
+    .loginOptions:nth-child(2){
+      
+      grid-area: 3 / 2 / 4 / 3;
+    }
+
+    
+
+    @media screen and (max-width: 850px){
+      #gridMain{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: min-content 1fr;
+        grid-row-gap: 12px;
+      }
+
+      #valInput{
+        grid-area: 1 / 1 / 2 / 4;
+      }
+
+      #ajouter{
+        grid-area: 2 / 3 / 3 / 4;
+      }
+
+      #tSuppr{
+        grid-area: 2 / 2 / 3 / 3; 
+      }
+
+      h3{
+        grid-area: 2 / 1 / 3 / 2;
+      }
+
+      #main{
+        width: 90%;
+      }
+    }
+
+    
+  </style>
+</html>
