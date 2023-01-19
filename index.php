@@ -225,7 +225,7 @@ if(isset($_POST['save'])){
       <div id="listes"></div>
     </div>
     <h4
-      onclick="window.open('https://dcjetc.com/meriadec-legal/portfolio', '_blank')"
+      onclick="window.open('https://m-legal.fr', '_blank')"
     >
       © 2022 - 2023 Meriadec Legal
     </h4>
