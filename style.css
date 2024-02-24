@@ -489,8 +489,13 @@ em {
     font-size: 40px;
   }
 
+  #mainContainerContent.active #main {
+    padding: 0;
+    margin: 0;
+  }
+
   #mainContainerContent.active {
-    transform: translateY(-26%);
+    flex-direction: column;
   }
 
   #titreEtListes {
