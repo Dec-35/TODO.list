@@ -1,0 +1,39 @@
+[
+    {
+        "username": "dec",
+        "password": "Dec35",
+        "lists": [
+            "cool",
+            " great",
+            " awesome"
+        ]
+    },
+    {
+        "username": "ref",
+        "password": "ref",
+        "lists": [
+            "fed",
+            "red"
+        ]
+    },
+    {
+        "username": "deb",
+        "password": "den",
+        "lists": [
+            "fed",
+            "red"
+        ]
+    },
+    {
+        "username": "awikz",
+        "password": "testmdp",
+        "lists": [
+            "test"
+        ]
+    },
+    {
+        "username": "test",
+        "password": "oui",
+        "lists": []
+    }
+]
